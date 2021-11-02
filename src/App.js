@@ -18,11 +18,11 @@ function App() {
         codes.forEach((x) => {
             const goodAirports = ['50r', 'egll', 'kaus', 'khou']
 
-            if (goodAirports.includes(icaoCodes)) {
-                console.log(icaoCodes + ' is good')
+            if (goodAirports.includes(x)) {
+                console.log(x + ' is good')
 
-                const infoUrl = 'http://localhost:3000/airports/' + icaoCodes + '.json'
-                const weatherUrl = 'http://localhost:3000/weather/' + icaoCodes + '.json'
+                const infoUrl = 'http://localhost:3000/airports/' + x + '.json'
+                const weatherUrl = 'http://localhost:3000/weather/' + x + '.json'
                 let info = { info: null, weather: null }
 
                 axios.all([

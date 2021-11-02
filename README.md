@@ -37,6 +37,19 @@ The data sources for this exercise can be accessed while the development server 
 -   `Weather Conditions` can be obtained at: http://localhost:3000/weather/<airport_identifier>.json
     -   Ex. http://localhost:3000/weather/kaus.json
 
+## Summary
+
+In total I have spent around 12 hours working on this project. I really enjoyed working on this project, it was really similar to a project I have done in Vue.js titled [Metar-App](https://metar-data.vercel.app/) which pulls real-time metar info from an API.
+
+There is more work that can be done with this project. It can use better error handling, it currently doesn't like when you enter multiple icao codes, and the card.js file could also be cleaned up a bit. In the future, I would also like to do more styling and and more functionality like removing airports and ability to get info for all airport using an API that I have used before.
+
+### What I used to build this project
+
+-   [TailwindCSS](https://tailwindcss.com/) for the design
+-   [Axios](https://axios-http.com/docs/intro) to handle api calls
+-   [FontAwesome](https://fontawesome.com/) for the cool Icons
+-   [undraw.io](https://undraw.co/illustrations) for the cool graphics
+
 ## Available Scripts
 
 In the project directory, you can run:

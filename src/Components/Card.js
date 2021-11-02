@@ -42,8 +42,8 @@ const Card = ({ airports }) => {
                         </div>
                     </div>
                     <div>
-                        <h2 className=' text-2xl'>Runways Available</h2>
-                        <div className=' text-base pt-4'>
+                        <h2 className=' text-2xl mt-8'>Runways Available</h2>
+                        <div className=' text-base pt-2'>
                             {airport.info.runways.map((x) => (
                                 <div className='flex items-center'>
                                     <FontAwesomeIcon icon={['fas', 'road']} /><p className='ml-2'> {x.ident}</p>
