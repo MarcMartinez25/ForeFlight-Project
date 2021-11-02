@@ -13,16 +13,14 @@ function App() {
     const handleSubmit = (e) => {
         e.preventDefault()
         const codes = icaoCodes.split(' ')
-        console.log(codes)
 
         codes.forEach((x) => {
             const goodAirports = ['50r', 'egll', 'kaus', 'khou']
 
             if (goodAirports.includes(x)) {
-                console.log(x + ' is good')
 
-                const infoUrl = 'https://fore-flight-project.vercel.app/airports/' + x + '.json'
-                const weatherUrl = 'https://fore-flight-project.vercel.app/weather/' + x + '.json'
+                const infoUrl = 'https://fore-flight-project.vercel.app/airports/' + x + '.json' // for dev: 'http://localhost:3000/airports/' + x + '.json'
+                const weatherUrl = 'https://fore-flight-project.vercel.app/' + x + '.json'  // for dev: 'http://localhost:3000/weather/' + x + '.json'
                 let info = { info: null, weather: null }
 
                 axios.all([
@@ -32,14 +30,12 @@ function App() {
                     .then(axios.spread((infoRes, weatherRes) => {
                         info.info = infoRes.data
                         info.weather = weatherRes.data
-                        console.log(info)
 
                         setAirports([...airports, info])
                     }))
 
             } else {
                 alert('Unable to find airport')
-                console.log('bad airport')
             }
         })
         setIcaoCodes('')
@@ -47,7 +43,7 @@ function App() {
     }
 
     return (
-        <div className='container mx-auto my-4'>
+        <div className='container mx-auto mt-4 mb-8'>
             <NavBar />
 
             <div className='flex flex-grow justify-center my-8'>
