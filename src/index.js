@@ -5,9 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCompass, faMapMarkedAlt, faMoon, faSearch, faSun } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faCloud, faCompass, faMapMarkedAlt, faMoon, faRoad, faSearch, faSun } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faSearch, faMapMarkedAlt, faCompass, faSun, faMoon)
+library.add(fab, faSearch, faMapMarkedAlt, faCompass, faSun, faMoon, faCloud, faClock, faRoad)
 
 ReactDOM.render(
     <React.StrictMode>
