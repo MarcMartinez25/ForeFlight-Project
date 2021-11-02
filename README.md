@@ -45,6 +45,7 @@ There is more work that can be done with this project. It can use better error h
 
 ### What I used to build this project
 
+-   Deployed using [Vercel](https://vercel.com/)
 -   [TailwindCSS](https://tailwindcss.com/) for the design
 -   [Axios](https://axios-http.com/docs/intro) to handle api calls
 -   [FontAwesome](https://fontawesome.com/) for the cool Icons

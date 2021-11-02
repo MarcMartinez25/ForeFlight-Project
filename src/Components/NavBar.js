@@ -7,7 +7,7 @@ function NavBar() {
             <div className='flex bg-blue-700 text-white rounded-md p-4 items-center'>
                 <p className='flex-grow-0 text-lg'>ForeFlight Web Project</p>
                 <div className='flex-grow'></div>
-                <div className='flex-grow-0'><a href="https://github.com/MarcMartinez25" target="_blank" rel="noreferrer" ><FontAwesomeIcon icon={['fab', 'github']} size="2x" /></a></div>
+                <div className='flex-grow-0'><a href="https://github.com/MarcMartinez25/ForeFlight-Project" target="_blank" rel="noreferrer" ><FontAwesomeIcon icon={['fab', 'github']} size="2x" /></a></div>
             </div>
         </div>
     )
