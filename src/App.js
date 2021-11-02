@@ -20,7 +20,7 @@ function App() {
             if (goodAirports.includes(x)) {
 
                 const infoUrl = 'https://fore-flight-project.vercel.app/airports/' + x + '.json' // for dev: 'http://localhost:3000/airports/' + x + '.json'
-                const weatherUrl = 'https://fore-flight-project.vercel.app/' + x + '.json'  // for dev: 'http://localhost:3000/weather/' + x + '.json'
+                const weatherUrl = 'https://fore-flight-project.vercel.app/weather/' + x + '.json'  // for dev: 'http://localhost:3000/weather/' + x + '.json'
                 let info = { info: null, weather: null }
 
                 axios.all([
