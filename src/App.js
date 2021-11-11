@@ -82,8 +82,8 @@ function App() {
 
                     info.station.icao = res[0].icao
                     info.station.name = res[0].station.name
-                    info.station.lat = res[0].station.geometry.coordinates[0]
-                    info.station.long = res[0].station.geometry.coordinates[1]
+                    info.station.lat = res[0].station.geometry.coordinates[1]
+                    info.station.long = res[0].station.geometry.coordinates[0]
                     info.station.runways = [{ ident: 'Unable to Obtain Runway Data' }]
 
                     info.weather.time = res[0].observed.substring(11, 16)
