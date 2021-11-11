@@ -39,8 +39,8 @@ function App() {
 
             if (goodAirports.includes(x)) {
 
-                const infoUrl = 'https://fore-flight-project.vercel.app/airports/' + x + '.json' // for dev: 'http://localhost:3000/airports/' + x + '.json'
-                const weatherUrl = 'https://fore-flight-project.vercel.app/weather/' + x + '.json'  // for dev: 'http://localhost:3000/weather/' + x + '.json'
+                const infoUrl = 'https://fore-flight-project.vercel.app/airports/' + x + '.json' // Optional for dev: 'http://localhost:3000/airports/' + x + '.json'
+                const weatherUrl = 'https://fore-flight-project.vercel.app/weather/' + x + '.json'  // Optional for dev: 'http://localhost:3000/weather/' + x + '.json'
 
                 axios.all([
                     axios.get(infoUrl),
@@ -49,9 +49,6 @@ function App() {
                     .then(axios.spread((infoRes, weatherRes) => {
                         let airport = infoRes.data
                         let weather = weatherRes.data
-
-                        // console.log(airport)
-                        // console.log(weather)
 
                         info.station.icao = airport.icao ? airport.icao : airport.faaCode
                         info.station.name = airport.name
@@ -77,8 +74,6 @@ function App() {
 
                 axios.get(checkWXUrl, axiosOptions).then((response) => {
                     let res = response.data.data;
-                    console.log(res)
-                    console.log(res[0].temperature.celcius)
 
                     info.station.icao = res[0].icao
                     info.station.name = res[0].station.name
