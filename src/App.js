@@ -39,8 +39,8 @@ function App() {
 
             if (goodAirports.includes(x)) {
 
-                const infoUrl = 'https://fore-flight-project.vercel.app/airports/' + x + '.json' // Optional for dev: 'http://localhost:3000/airports/' + x + '.json'
-                const weatherUrl = 'https://fore-flight-project.vercel.app/weather/' + x + '.json'  // Optional for dev: 'http://localhost:3000/weather/' + x + '.json'
+                const infoUrl = 'https://foreflight-project.vercel.app/airports/' + x + '.json' // Optional for dev: 'http://localhost:3000/airports/' + x + '.json'
+                const weatherUrl = 'https://foreflight-project.vercel.app/weather/' + x + '.json'  // Optional for dev: 'http://localhost:3000/weather/' + x + '.json'
 
                 axios.all([
                     axios.get(infoUrl),
