@@ -6,6 +6,7 @@ import NavBar from "./Components/NavBar";
 import Card from './Components/Card'
 
 function App() {
+    const axiosOptions = { headers: { "X-API-Key": "f419ee367c914e7b94134a009f" } }
     const [showIcon, setShowIcon] = useState(true)
     const [icaoCodes, setIcaoCodes] = useState('')
     const [airports, setAirports] = useState([])
@@ -13,6 +14,25 @@ function App() {
     const handleSubmit = (e) => {
         e.preventDefault()
         const codes = icaoCodes.split(' ')
+        const info = {
+            station: {
+                icao: null,
+                name: null,
+                lat: null,
+                long: null,
+                runways: []
+            },
+            weather: {
+                time: null,
+                flightRules: null,
+                temp: null,
+                humidity: null,
+                visibility: null,
+                windSpeed: null,
+                windDirection: null,
+                cloudCoverage: null
+            }
+        }
 
         codes.forEach((x) => {
             const goodAirports = ['50r', 'egll', 'kaus', 'khou']
@@ -21,21 +41,62 @@ function App() {
 
                 const infoUrl = 'https://fore-flight-project.vercel.app/airports/' + x + '.json' // for dev: 'http://localhost:3000/airports/' + x + '.json'
                 const weatherUrl = 'https://fore-flight-project.vercel.app/weather/' + x + '.json'  // for dev: 'http://localhost:3000/weather/' + x + '.json'
-                let info = { info: null, weather: null }
 
                 axios.all([
                     axios.get(infoUrl),
                     axios.get(weatherUrl)
                 ])
                     .then(axios.spread((infoRes, weatherRes) => {
-                        info.info = infoRes.data
-                        info.weather = weatherRes.data
+                        let airport = infoRes.data
+                        let weather = weatherRes.data
+
+                        // console.log(airport)
+                        // console.log(weather)
+
+                        info.station.icao = airport.icao ? airport.icao : airport.faaCode
+                        info.station.name = airport.name
+                        info.station.lat = airport.latitude.toString().substring(0, 8)
+                        info.station.long = airport.longitude.toString().substring(0, 9)
+                        info.station.runways = airport.runways
+
+                        info.weather.time = weather.report.conditions ? weather.report.conditions.dateIssued.substring(11, 16) : weather.report.forecast.conditions[0].dateIssued.substring(11, 16)
+                        info.weather.flightRules = weather.report.conditions && weather.report.conditions.flightRules
+                        info.weather.temp = weather.report.conditions ? weather.report.conditions.tempC + 'C' : 'Unknown'
+                        info.weather.humidity = weather.report.conditions ? weather.report.conditions.relativeHumidity : weather.report.forecast.conditions[0].relativeHumidity
+                        info.weather.windSpeed = weather.report.conditions ? weather.report.conditions.wind.speedKts : weather.report.forecast.conditions[0].wind.speedKts
+                        info.weather.windDirection = weather.report.conditions ? weather.report.conditions.wind.direction : weather.report.forecast.conditions[0].wind.direction
+                        info.weather.cloudCoverage = weather.report.conditions ? weather.report.conditions.cloudLayers[0].coverage : weather.report.forecast.conditions[0].cloudLayers[0].coverage
+                        info.weather.visibility = weather.report.conditions ? weather.report.conditions.visibility.distanceSm : weather.report.forecast.conditions[0].visibility.distanceSm
 
                         setAirports([...airports, info])
+
                     }))
 
             } else {
-                alert('Unable to find airport')
+                const checkWXUrl = "https://api.checkwx.com/metar/" + x + "/decoded";
+
+                axios.get(checkWXUrl, axiosOptions).then((response) => {
+                    let res = response.data.data;
+                    console.log(res)
+                    console.log(res[0].temperature.celcius)
+
+                    info.station.icao = res[0].icao
+                    info.station.name = res[0].station.name
+                    info.station.lat = res[0].station.geometry.coordinates[0]
+                    info.station.long = res[0].station.geometry.coordinates[1]
+                    info.station.runways = [{ ident: 'Unable to Obtain Runway Data' }]
+
+                    info.weather.time = res[0].observed.substring(11, 16)
+                    info.weather.flightRules = res[0].flight_category.toLowerCase()
+                    info.weather.temp = res[0].temperature.celsius + 'C'
+                    info.weather.humidity = res[0].humidity.percent
+                    info.weather.windSpeed = res[0].wind.speed_kts
+                    info.weather.windDirection = res[0].wind.degrees
+                    info.weather.cloudCoverage = res[0].clouds[0].code
+                    info.weather.visibility = res[0].visibility.miles
+
+                    setAirports([...airports, info])
+                })
             }
         })
         setIcaoCodes('')
